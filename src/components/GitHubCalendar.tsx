@@ -1,5 +1,6 @@
 import { GitHubCalendar } from "react-github-calendar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement } from "react";
+import type { Activity } from "react-activity-calendar";
 
 const lightTheme = {
   light: [
@@ -10,6 +11,11 @@ const lightTheme = {
     "#196127",
   ],
 };
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr + "T00:00:00");
+  return date.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+}
 
 export default function GitHubActivity() {
   const [isDark, setIsDark] = useState(() =>
@@ -30,7 +36,7 @@ export default function GitHubActivity() {
   }, []);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="github-calendar-wrapper overflow-x-auto">
       <GitHubCalendar
         username="alexanderqchen"
         theme={isDark ? undefined : lightTheme}
@@ -38,6 +44,13 @@ export default function GitHubActivity() {
         fontSize={12}
         blockSize={11}
         blockMargin={3}
+        renderBlock={(block, activity: Activity) =>
+          cloneElement(block, {}, (
+            <title>
+              {`${formatDate(activity.date)}: ${activity.count} contribution${activity.count !== 1 ? "s" : ""}`}
+            </title>
+          ))
+        }
       />
     </div>
   );

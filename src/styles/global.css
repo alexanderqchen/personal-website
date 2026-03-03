@@ -34,3 +34,23 @@
 :root:not(.dark) .border-t {
   border-color: #ddd5c8;
 }
+
+/* Dark scrollbar for GitHub calendar */
+.dark .github-calendar-wrapper,
+.dark .github-calendar-wrapper .react-activity-calendar__scroll-container {
+  scrollbar-color: #4a5568 #1e2533;
+  scrollbar-width: thin;
+}
+.dark .github-calendar-wrapper::-webkit-scrollbar,
+.dark .github-calendar-wrapper .react-activity-calendar__scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.dark .github-calendar-wrapper::-webkit-scrollbar-track,
+.dark .github-calendar-wrapper .react-activity-calendar__scroll-container::-webkit-scrollbar-track {
+  background: #1e2533;
+}
+.dark .github-calendar-wrapper::-webkit-scrollbar-thumb,
+.dark .github-calendar-wrapper .react-activity-calendar__scroll-container::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 3px;
+}
