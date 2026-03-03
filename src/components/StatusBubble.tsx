@@ -8,7 +8,7 @@ interface Props {
 }
 
 function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number): string {
-  const radii = [30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20];
+  const radii = [70, 58, 75, 55, 80, 60, 72, 56, 68, 62, 78, 55, 74, 58, 82, 56, 70, 60, 76, 55, 80, 58, 72, 56, 68, 62, 78, 55, 74, 58, 82, 56, 70, 60, 76, 55];
   const cr = 30; // corner arc radius
 
   const totalW = w + padX * 2;
@@ -86,7 +86,7 @@ export default function StatusBubble({ emoji, text }: Props) {
     return () => obs.disconnect();
   }, []);
 
-  const maxR = 34;
+  const maxR = 82;
   const padX = 38;
   const padTop = 40;
   const padBottom = 30;
