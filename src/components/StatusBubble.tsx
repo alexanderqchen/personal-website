@@ -8,7 +8,7 @@ interface Props {
 }
 
 function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number): string {
-  const radii = [90, 55, 80, 60, 95, 50, 75, 65, 90, 55, 80, 60, 95, 50, 75, 65, 90, 55, 80, 60, 95, 50, 75, 65, 90, 55, 80, 60, 95, 50, 75, 65, 90, 55, 80, 60];
+  const radii = [30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20, 28, 24, 34, 20, 30, 22, 32, 20];
   const cr = 30; // corner arc radius
 
   const totalW = w + padX * 2;
@@ -21,7 +21,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   const leftLen = rightLen;
 
   function edgeBumps(len: number, startX: number, startY: number, dx: number, dy: number, ri: number): string {
-    const n = Math.max(3, Math.floor(len / 60));
+    const n = Math.max(3, Math.floor(len / 55));
     const step = len / n;
     let d = "";
     for (let i = 0; i < n; i++) {
@@ -38,7 +38,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
 
   // Top edge: left to right
   let ri = 0;
-  const topN = Math.max(3, Math.floor(topLen / 60));
+  const topN = Math.max(3, Math.floor(topLen / 55));
   d += edgeBumps(topLen, cr, 0, 1, 0, ri);
   ri += topN;
 
@@ -46,7 +46,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 ${totalW},${cr} `;
 
   // Right edge: top to bottom
-  const rightN = Math.max(3, Math.floor(rightLen / 60));
+  const rightN = Math.max(3, Math.floor(rightLen / 55));
   d += edgeBumps(rightLen, totalW, cr, 0, 1, ri % radii.length);
   ri += rightN;
 
@@ -54,7 +54,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 ${totalW - cr},${totalH} `;
 
   // Bottom edge: right to left (reverse)
-  const bottomN = Math.max(3, Math.floor(bottomLen / 60));
+  const bottomN = Math.max(3, Math.floor(bottomLen / 55));
   d += edgeBumps(bottomLen, totalW - cr, totalH, -1, 0, ri % radii.length);
   ri += bottomN;
 
@@ -62,7 +62,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 0,${totalH - cr} `;
 
   // Left edge: bottom to top (reverse)
-  const leftN = Math.max(3, Math.floor(leftLen / 60));
+  const leftN = Math.max(3, Math.floor(leftLen / 55));
   d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, ri % radii.length);
 
   // Top-left corner arc (back to start)
@@ -86,10 +86,10 @@ export default function StatusBubble({ emoji, text }: Props) {
     return () => obs.disconnect();
   }, []);
 
-  const maxR = 95;
-  const padX = 30;
-  const padTop = 35;
-  const padBottom = 25;
+  const maxR = 34;
+  const padX = 38;
+  const padTop = 40;
+  const padBottom = 30;
   const svgW = size.w + padX * 2;
   const svgH = size.h + padTop + padBottom;
 
@@ -100,7 +100,7 @@ export default function StatusBubble({ emoji, text }: Props) {
         <svg
           width={svgW}
           height={svgH}
-          style={{ position: "absolute", top: -padTop, left: -padX }}
+          style={{ position: "absolute", top: -padTop, left: -padX, overflow: "visible" }}
           aria-hidden="true"
         >
           <path
