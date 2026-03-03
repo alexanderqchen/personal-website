@@ -23,6 +23,7 @@ export default function GitHubActivity() {
       ? document.documentElement.classList.contains("dark")
       : false
   );
+  const [totalCount, setTotalCount] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -44,6 +45,12 @@ export default function GitHubActivity() {
         fontSize={12}
         blockSize={11}
         blockMargin={3}
+        showTotalCount={false}
+        transformData={(data) => {
+          const total = data.reduce((sum, d) => sum + d.count, 0);
+          setTotalCount(total);
+          return data;
+        }}
         renderBlock={(block, activity: Activity) => (
           <g>
             <title>{`${formatDate(activity.date)}: ${activity.count} contribution${activity.count !== 1 ? "s" : ""}`}</title>
@@ -51,6 +58,11 @@ export default function GitHubActivity() {
           </g>
         )}
       />
+      {totalCount !== null && (
+        <p style={{ fontSize: 12, marginTop: 8, color: "inherit", opacity: 0.7 }}>
+          {totalCount.toLocaleString()} contributions in the last year
+        </p>
+      )}
     </div>
   );
 }
