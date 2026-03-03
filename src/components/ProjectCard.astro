@@ -21,7 +21,7 @@ const Tag = href ? "a" : "div";
 
 <div class="relative">
   {focused && (
-    <span class="absolute -top-px left-4 -translate-y-1/2 text-xs px-2 py-0.5 rounded-full font-medium bg-indigo-500 text-white dark:bg-indigo-600 dark:text-white z-10">
+    <span class="absolute -top-px left-4 -translate-y-1/2 text-xs px-1 font-medium text-indigo-500 dark:text-indigo-400 bg-[#faf6ef] dark:bg-[#141c26] z-10">
       Current focus
     </span>
   )}
@@ -32,7 +32,7 @@ const Tag = href ? "a" : "div";
     class:list={[
       "block rounded-xl p-5 transition-colors",
       focused
-        ? "border-2 border-indigo-400 dark:border-indigo-500"
+        ? "border border-indigo-400 dark:border-indigo-500"
         : "border border-neutral-200 dark:border-neutral-800",
       href && "hover:border-indigo-500 dark:hover:border-indigo-400 cursor-pointer",
       !focused && href && "hover:border-neutral-300 dark:hover:border-neutral-700",

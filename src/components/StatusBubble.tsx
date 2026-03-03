@@ -95,7 +95,7 @@ export default function StatusBubble({ emoji, text }: Props) {
   const svgH = size.h + padTop + padBottom;
 
   return (
-    <div style={{ paddingLeft: 8, marginTop: padTop, marginBottom: padBottom }}>
+    <div style={{ paddingLeft: 8, marginTop: padTop, marginBottom: 0 }}>
       {/* Cloud */}
       <div style={{ position: "relative", display: "inline-block" }}>
         <svg
@@ -125,11 +125,11 @@ export default function StatusBubble({ emoji, text }: Props) {
         </div>
       </div>
 
-      {/* Thought trail */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 5, paddingLeft: 24, marginTop: padBottom + 6 }}>
-        <div className="trail-dot" style={{ width: 14, height: 14 }} />
-        <div className="trail-dot" style={{ width: 10, height: 10 }} />
-        <div className="trail-dot" style={{ width: 6, height: 6 }} />
+      {/* Thought trail — angled down-left */}
+      <div style={{ position: "relative", height: 40, marginTop: padBottom + 6 }}>
+        <div className="trail-dot" style={{ width: 14, height: 14, position: "absolute", left: 24, top: 0 }} />
+        <div className="trail-dot" style={{ width: 10, height: 10, position: "absolute", left: 14, top: 14 }} />
+        <div className="trail-dot" style={{ width: 6,  height: 6,  position: "absolute", left: 6,  top: 26 }} />
       </div>
 
       <style>{`

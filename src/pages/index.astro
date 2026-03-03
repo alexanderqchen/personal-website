@@ -15,7 +15,9 @@ const posts = (await getCollection("blog"))
 <BaseLayout title="Alexander Chen">
   <!-- Status + Intro -->
   <section class="mb-16">
-    <StatusBubble emoji={status.emoji} text={status.text} />
+    <div class="flex justify-end">
+      <StatusBubble emoji={status.emoji} text={status.text} />
+    </div>
     <div class="mt-8">
       <h1 class="text-3xl font-bold mb-4 font-serif">Hey, I'm Alex!</h1>
       <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
