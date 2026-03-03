@@ -72,15 +72,18 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
 export default function StatusBubble({ emoji, text }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 320, h: 64 });
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     const el = contentRef.current;
     if (!el) return;
     const obs = new ResizeObserver(() => {
       setSize({ w: el.offsetWidth, h: el.offsetHeight });
+      setInitialized(true);
     });
     obs.observe(el);
     setSize({ w: el.offsetWidth, h: el.offsetHeight });
+    setInitialized(true);
     return () => obs.disconnect();
   }, []);
 
@@ -98,7 +101,7 @@ export default function StatusBubble({ emoji, text }: Props) {
         <svg
           width={svgW}
           height={svgH}
-          style={{ position: "absolute", top: -padTop, left: -padX, overflow: "visible" }}
+          style={{ position: "absolute", top: -padTop, left: -padX, overflow: "visible", visibility: initialized ? "visible" : "hidden" }}
           aria-hidden="true"
         >
           <path

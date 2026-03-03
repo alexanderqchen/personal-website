@@ -18,11 +18,13 @@ function formatDate(dateStr: string): string {
 }
 
 export default function GitHubActivity() {
-  const [isDark, setIsDark] = useState(() =>
-    typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return false;
+    // Check localStorage first (set by Astro theme script before hydration)
+    const stored = localStorage.getItem("theme");
+    if (stored) return stored === "dark";
+    return document.documentElement.classList.contains("dark");
+  });
   const [totalCount, setTotalCount] = useState<number | null>(null);
 
   useEffect(() => {
