@@ -9,6 +9,7 @@ import ProjectCard from "../components/ProjectCard.astro";
     Things I've built and am building.
   </p>
 
+  <!-- Active -->
   <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
       Active
@@ -16,30 +17,89 @@ import ProjectCard from "../components/ProjectCard.astro";
     <div class="grid gap-4">
       <ProjectCard
         name="orb-ui"
-        description="Open-source React component library for voice AI agents. Building the UI layer for how humans talk to machines."
+        description="Open-source React component library for voice AI agents. Animated, themeable orbs that respond to speech — the UI layer for how humans talk to machines."
         status="Active"
         tags={["React", "TypeScript", "Voice AI", "Open Source"]}
         links={[
-          {
-            label: "GitHub",
-            href: "https://github.com/alexanderqchen/orb-ui",
-          },
+          { label: "GitHub", href: "https://github.com/alexanderqchen/orb-ui" },
           { label: "npm", href: "https://www.npmjs.com/package/orb-ui" },
+        ]}
+      />
+      <ProjectCard
+        name="TypeChinese"
+        description="Typing practice for Chinese learners — Simplified and Traditional, with Pinyin, Zhuyin, and Cangjie hints. Built in 2023, still getting 500 users a month."
+        status="Active"
+        tags={["Next.js", "TypeScript", "Language Learning"]}
+        links={[
+          { label: "Live", href: "https://typechinese.io" },
+          { label: "GitHub", href: "https://github.com/alexanderqchen/type-chinese" },
         ]}
       />
     </div>
   </section>
 
-  <section>
+  <!-- Shipped -->
+  <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Archive
+      Shipped
     </h2>
     <div class="grid gap-4">
       <ProjectCard
-        name="Trata"
-        description="Co-founded late 2024, left early 2026. Startup building in the commerce space. Was CTO."
-        status="Left"
-        tags={["Startup", "CTO", "Commerce"]}
+        name="Keyboard Layout Tester"
+        description="Browser tool for trying out alternative keyboard layouts — QWERTY, Dvorak, Colemak. Type on real text and feel the difference without reconfiguring your OS."
+        status="Shipped"
+        tags={["JavaScript", "Typing"]}
+        links={[
+          { label: "Live", href: "https://keyboard.experimental.software" },
+        ]}
+      />
+      <ProjectCard
+        name="Google Flights Currency"
+        description="Chrome extension that locks your preferred currency on Google Flights. Built in Taiwan when every search kept defaulting to NTD with no way to save USD as default."
+        status="Shipped"
+        tags={["Chrome Extension", "JavaScript"]}
+        links={[
+          { label: "GitHub", href: "https://github.com/alexanderqchen/google-flights-currency" },
+        ]}
+      />
+      <ProjectCard
+        name="React PDF Viewer"
+        description="A tutorial and reference implementation for embedding PDF viewing in React apps. The Medium article got traction and the repo picked up 25 stars."
+        status="Shipped"
+        tags={["React", "Tutorial"]}
+        links={[
+          { label: "GitHub", href: "https://github.com/alexanderqchen/pdf-viewer" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Graveyard -->
+  <section class="mb-12">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Graveyard 🪦
+    </h2>
+    <p class="text-sm text-neutral-500 dark:text-neutral-500 mb-4">
+      Projects I built, shipped (or didn't), and moved on from. Every one of these taught me something.
+    </p>
+    <div class="grid gap-4">
+      <ProjectCard
+        name="1000 Pound Club"
+        description="Powerlifting tracker with one goal: hit a combined 1,000 lb total across bench, squat, and deadlift. Like Couch to 5K but for strength. Built in Taiwan."
+        status="Graveyard"
+        tags={["React", "Fitness"]}
+        links={[
+          { label: "Live", href: "https://1000pound.com" },
+        ]}
+      />
+      <ProjectCard
+        name="Infinite Craft Solver"
+        description="When neal.fun dropped Infinite Craft, I wrote a script to brute-force thousands of combinations and discover words nobody had found yet. Wanted to make a YouTube video about it — never did."
+        status="Graveyard"
+        tags={["Python", "Automation"]}
+        links={[
+          { label: "GitHub", href: "https://github.com/alexanderqchen/infinite-craft-solver" },
+        ]}
       />
     </div>
   </section>
