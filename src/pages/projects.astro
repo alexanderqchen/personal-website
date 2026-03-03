@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<BaseLayout title="Projects — Alexander Chen" description="Things I've built and am building.">
+  <h1 class="text-3xl font-bold mb-2 font-serif">Projects</h1>
+  <p class="text-neutral-600 dark:text-neutral-400 mb-10">
+    Things I've built and am building.
+  </p>
+
+  <section class="mb-12">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Active
+    </h2>
+    <div class="grid gap-4">
+      <ProjectCard
+        name="orb-ui"
+        description="Open-source React component library for voice AI agents. Building the UI layer for how humans talk to machines."
+        status="Active"
+        tags={["React", "TypeScript", "Voice AI", "Open Source"]}
+        links={[
+          {
+            label: "GitHub",
+            href: "https://github.com/alexanderqchen/orb-ui",
+          },
+          { label: "npm", href: "https://www.npmjs.com/package/orb-ui" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Archive
+    </h2>
+    <div class="grid gap-4">
+      <ProjectCard
+        name="Trata"
+        description="Co-founded late 2024, left early 2026. Startup building in the commerce space. Was CTO."
+        status="Left"
+        tags={["Startup", "CTO", "Commerce"]}
+      />
+    </div>
+  </section>
+</BaseLayout>

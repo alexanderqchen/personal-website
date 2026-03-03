@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog — Alexander Chen" description="Writing about building, learning, and figuring things out.">
+  <h1 class="text-3xl font-bold mb-2 font-serif">Blog</h1>
+  <p class="text-neutral-600 dark:text-neutral-400 mb-10">
+    Thoughts on building, learning, and figuring things out.
+  </p>
+
+  <div class="space-y-4">
+    {
+      posts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="block border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+        >
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 class="font-medium">{post.data.title}</h2>
+            <time class="text-sm text-neutral-500 whitespace-nowrap">
+              {post.data.date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </time>
+          </div>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+            {post.data.description}
+          </p>
+        </a>
+      ))
+    }
+  </div>
+
+  {
+    posts.length === 0 && (
+      <p class="text-neutral-500">No posts yet. Check back soon.</p>
+    )
+  }
+</BaseLayout>

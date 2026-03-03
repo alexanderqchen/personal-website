@@ -1,0 +1,145 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import GitHubActivity from "../components/GitHubCalendar.tsx";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Alexander Chen">
+  <!-- Intro -->
+  <section class="mb-16">
+    <h1 class="text-3xl font-bold mb-4 font-serif">Hey, I'm Alexander.</h1>
+    <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      27-year-old builder. Ex-cofounder/CTO. Now doing my own thing — making
+      stuff I care about and sharing the process. Inspired by people who build
+      weird, beautiful things on the internet.
+    </p>
+  </section>
+
+  <!-- Now -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Now
+    </h2>
+    <div
+      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
+    >
+      <p class="text-neutral-700 dark:text-neutral-300">
+        Building <a
+          href="https://github.com/alexanderqchen/orb-ui"
+          class="text-accent hover:text-accent-dark font-medium transition-colors"
+          target="_blank"
+          rel="noopener noreferrer">orb-ui</a
+        > — an open-source React component library for voice AI agents.
+        Designing the interface for how humans talk to machines.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Projects
+    </h2>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <ProjectCard
+        name="orb-ui"
+        description="Open-source React component library for voice AI agents."
+        status="Active"
+        links={[
+          {
+            label: "GitHub",
+            href: "https://github.com/alexanderqchen/orb-ui",
+          },
+          { label: "npm", href: "https://www.npmjs.com/package/orb-ui" },
+        ]}
+      />
+      <ProjectCard
+        name="Trata"
+        description="Co-founded late 2024. Startup building in the commerce space."
+        status="Left"
+      />
+    </div>
+    <a
+      href="/projects"
+      class="inline-block mt-4 text-sm text-accent hover:text-accent-dark transition-colors"
+    >
+      All projects &rarr;
+    </a>
+  </section>
+
+  <!-- GitHub Activity -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      GitHub
+    </h2>
+    <div
+      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
+    >
+      <GitHubActivity client:load />
+    </div>
+  </section>
+
+  <!-- Revenue -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Revenue <span class="normal-case tracking-normal font-normal">(building in public)</span>
+    </h2>
+    <div
+      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
+    >
+      <div class="flex gap-8">
+        <div>
+          <p class="text-2xl font-bold">$0</p>
+          <p class="text-sm text-neutral-500">MRR</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold">$0</p>
+          <p class="text-sm text-neutral-500">ARR</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Writing -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Recent Writing
+    </h2>
+    <div class="space-y-4">
+      {
+        posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="block border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+          >
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="font-medium">{post.data.title}</h3>
+              <time class="text-sm text-neutral-500 whitespace-nowrap">
+                {post.data.date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+              {post.data.description}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+    <a
+      href="/blog"
+      class="inline-block mt-4 text-sm text-accent hover:text-accent-dark transition-colors"
+    >
+      All posts &rarr;
+    </a>
+  </section>
+</BaseLayout>
