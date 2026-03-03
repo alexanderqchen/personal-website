@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    background-color: #f2ede4;
+    background-color: #f7f2ea;
     color: #1a1a1a;
     @apply antialiased;
   }
