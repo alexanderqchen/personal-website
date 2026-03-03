@@ -9,81 +9,86 @@ import ProjectCard from "../components/ProjectCard.astro";
     Things I've built and am building.
   </p>
 
-  <!-- Active -->
+  <!-- Currently focused on -->
   <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Active
+      Currently focused on
     </h2>
     <div class="grid gap-4">
       <ProjectCard
         name="orb-ui"
-        description="Open-source React component library for voice AI agents. Animated, themeable orbs that respond to speech — the UI layer for how humans talk to machines."
-        status="Active"
-        tags={["React", "TypeScript", "Voice AI", "Open Source"]}
+        description="Open-source React component library for voice AI agents."
+        status="WIP"
         href="https://github.com/alexanderqchen/orb-ui"
       />
       <ProjectCard
         name="TypeChinese"
-        description="Typing practice for Chinese learners — Simplified and Traditional, with Pinyin, Zhuyin, and Cangjie hints. Built in 2023, still getting 500 users a month."
-        status="Active"
-        tags={["Next.js", "TypeScript", "Language Learning"]}
+        description="Typing practice for Chinese learners. Still getting 500 users a month."
+        status="Live"
         href="https://typechinese.io"
       />
     </div>
   </section>
 
-  <!-- Shipped -->
+  <!-- WIP -->
   <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Shipped
+      WIP
     </h2>
     <div class="grid gap-4">
       <ProjectCard
-        name="Keyboard Layout Tester"
-        description="Browser tool for trying out alternative keyboard layouts — QWERTY, Dvorak, Colemak. Type on real text and feel the difference without reconfiguring your OS."
-        status="Shipped"
-        tags={["JavaScript", "Typing"]}
-        href="https://keyboard.experimental.software"
-      />
-      <ProjectCard
-        name="Google Flights Currency"
-        description="Chrome extension that locks your preferred currency on Google Flights. Built in Taiwan when every search kept defaulting to NTD with no way to save USD as default."
-        status="Shipped"
-        tags={["Chrome Extension", "JavaScript"]}
-        href="https://github.com/alexanderqchen/google-flights-currency"
-      />
-      <ProjectCard
-        name="React PDF Viewer"
-        description="A tutorial and reference implementation for embedding PDF viewing in React apps. The Medium article got traction and the repo picked up 25 stars."
-        status="Shipped"
-        tags={["React", "Tutorial"]}
-        href="https://github.com/alexanderqchen/pdf-viewer"
+        name="orb-ui"
+        description="Open-source React component library for voice AI agents."
+        status="WIP"
+        href="https://github.com/alexanderqchen/orb-ui"
       />
     </div>
   </section>
 
-  <!-- Graveyard -->
+  <!-- Live -->
   <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Graveyard 🪦
+      Live
     </h2>
-    <p class="text-sm text-neutral-500 dark:text-neutral-500 mb-4">
-      Projects I built, shipped (or didn't), and moved on from. Every one of these taught me something.
-    </p>
+    <div class="grid gap-4">
+      <ProjectCard
+        name="TypeChinese"
+        description="Typing practice for Chinese learners. Still getting 500 users a month."
+        status="Live"
+        href="https://typechinese.io"
+      />
+      <ProjectCard
+        name="Keyboard Layout Tester"
+        description="Test and compare keyboard layouts side by side."
+        status="Live"
+        href="https://keyboard.experimental.software"
+      />
+      <ProjectCard
+        name="Google Flights Currency"
+        description="See Google Flights prices in your local currency."
+        status="Live"
+        href="https://github.com/alexanderqchen/google-flights-currency"
+      />
+    </div>
+  </section>
+
+  <!-- Dead -->
+  <section class="mb-12">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      Dead 🪦
+    </h2>
     <div class="grid gap-4">
       <ProjectCard
         name="1000 Pound Club"
-        description="Powerlifting tracker with one goal: hit a combined 1,000 lb total across bench, squat, and deadlift. Like Couch to 5K but for strength. Built in Taiwan."
-        status="Graveyard"
-        tags={["React", "Fitness"]}
-        href="https://1000pound.com"
+        description="Become a member of the 1000 pound club."
+        status="Dead"
+        href="https://github.com/alexanderqchen/1000-pound-club"
       />
       <ProjectCard
-        name="Infinite Craft Solver"
-        description="When neal.fun dropped Infinite Craft, I wrote a script to brute-force thousands of combinations and discover words nobody had found yet. Wanted to make a YouTube video about it — never did."
-        status="Graveyard"
-        tags={["Python", "Automation"]}
-        href="https://github.com/alexanderqchen/infinite-craft-solver"
+        name="flux.rip"
+        description="A social media site where the UX is so weird it becomes unusable. Built in college."
+        status="Dead"
+        href="https://github.com/UCLA-Creative-Labs/flux"
       />
     </div>
   </section>
