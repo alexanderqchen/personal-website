@@ -6,8 +6,14 @@
 
 @layer base {
   body {
-    @apply bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
+    background-color: #f8f5f0;
+    color: #1a1a1a;
     @apply antialiased;
+  }
+
+  .dark body {
+    background-color: #0d1117;
+    color: #e6edf3;
   }
 
   ::selection {
