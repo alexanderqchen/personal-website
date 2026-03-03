@@ -1,5 +1,5 @@
 import { GitHubCalendar } from "react-github-calendar";
-import { useState, useEffect, cloneElement } from "react";
+import { useState, useEffect } from "react";
 import type { Activity } from "react-activity-calendar";
 
 const lightTheme = {
@@ -44,13 +44,12 @@ export default function GitHubActivity() {
         fontSize={12}
         blockSize={11}
         blockMargin={3}
-        renderBlock={(block, activity: Activity) =>
-          cloneElement(block, {}, (
-            <title>
-              {`${formatDate(activity.date)}: ${activity.count} contribution${activity.count !== 1 ? "s" : ""}`}
-            </title>
-          ))
-        }
+        renderBlock={(block, activity: Activity) => (
+          <g>
+            <title>{`${formatDate(activity.date)}: ${activity.count} contribution${activity.count !== 1 ? "s" : ""}`}</title>
+            {block}
+          </g>
+        )}
       />
     </div>
   );
