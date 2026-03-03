@@ -20,12 +20,12 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   const bottomLen = topLen;
   const leftLen = rightLen;
 
-  function edgeBumps(len: number, startX: number, startY: number, dx: number, dy: number, ri: number): string {
-    const n = Math.max(3, Math.floor(len / 55));
+  function edgeBumps(len: number, startX: number, startY: number, dx: number, dy: number, ri: number, forcedN?: number, sideR?: number): string {
+    const n = forcedN ?? Math.max(3, Math.floor(len / 55));
     const step = len / n;
     let d = "";
     for (let i = 0; i < n; i++) {
-      const r = radii[(ri + i) % radii.length];
+      const r = sideR ?? radii[(ri + i) % radii.length];
       const ex = startX + dx * step * (i + 1);
       const ey = startY + dy * step * (i + 1);
       d += `A ${r},${r} 0 0,1 ${ex.toFixed(2)},${ey.toFixed(2)} `;
@@ -45,10 +45,9 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   // Top-right corner arc
   d += `A ${cr},${cr} 0 0,1 ${totalW},${cr} `;
 
-  // Right edge: top to bottom
-  const rightN = Math.max(3, Math.floor(rightLen / 55));
-  d += edgeBumps(rightLen, totalW, cr, 0, 1, ri % radii.length);
-  ri += rightN;
+  // Right edge: 1 bump spanning the full side
+  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, 45);
+  ri += 1;
 
   // Bottom-right corner arc
   d += `A ${cr},${cr} 0 0,1 ${totalW - cr},${totalH} `;
@@ -61,9 +60,8 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   // Bottom-left corner arc
   d += `A ${cr},${cr} 0 0,1 0,${totalH - cr} `;
 
-  // Left edge: bottom to top (reverse)
-  const leftN = Math.max(3, Math.floor(leftLen / 55));
-  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, ri % radii.length);
+  // Left edge: 1 bump spanning the full side
+  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, 45);
 
   // Top-left corner arc (back to start)
   d += `A ${cr},${cr} 0 0,1 ${cr},0 `;
