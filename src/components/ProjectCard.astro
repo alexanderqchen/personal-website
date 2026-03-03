@@ -37,7 +37,7 @@ const Tag = href ? "a" : "div";
         </span>
       )}
       <span class:list={["text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
-        {status}
+        {{ WIP: "🚧", Live: "🔴", Dead: "🪦" }[status]} {status}
       </span>
     </div>
   </div>
