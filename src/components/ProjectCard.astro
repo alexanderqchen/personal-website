@@ -32,9 +32,7 @@ const Tag = href ? "a" : "div";
     <h3 class="font-semibold">{name}</h3>
     <div class="flex items-center gap-1.5">
       {focused && (
-        <span class="text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
-          ★ focused
-        </span>
+        <span class="text-sm" title="Currently focused on">📌</span>
       )}
       <span class:list={["inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
         <span>{{ WIP: "🚧", Live: "🔴", Dead: "🪦" }[status]}</span><span>{status}</span>
