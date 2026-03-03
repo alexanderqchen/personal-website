@@ -1,10 +1,9 @@
 import { GitHubCalendar } from "react-github-calendar";
+import { useState, useEffect } from "react";
 
-// Only customize the "empty" square for light mode to match warm beige bg.
-// Dark mode uses the default GitHub green-on-dark palette.
 const lightTheme = {
   light: [
-    "#ddd5c8", // empty — warm tan, matches page border color
+    "#ddd5c8", // empty — warm tan matching page border color
     "#c6e48b",
     "#7bc96f",
     "#239a3b",
@@ -13,9 +12,22 @@ const lightTheme = {
 };
 
 export default function GitHubActivity() {
-  const isDark =
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+  const [isDark, setIsDark] = useState(() =>
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : false
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="overflow-x-auto">
