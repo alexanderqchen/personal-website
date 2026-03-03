@@ -36,8 +36,8 @@ const Tag = href ? "a" : "div";
           ★ focused
         </span>
       )}
-      <span class:list={["text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
-        {{ WIP: "🚧", Live: "🔴", Dead: "🪦" }[status]} {status}
+      <span class:list={["inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
+        <span>{{ WIP: "🚧", Live: "🔴", Dead: "🪦" }[status]}</span><span>{status}</span>
       </span>
     </div>
   </div>
