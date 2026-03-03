@@ -20,3 +20,17 @@
     @apply bg-accent/20;
   }
 }
+
+/* Warm up borders and card surfaces in light mode only */
+:root:not(.dark) .border-neutral-200 {
+  border-color: #ddd5c8;
+}
+:root:not(.dark) .hover\:border-neutral-300:hover {
+  border-color: #cec4b5;
+}
+:root:not(.dark) .bg-neutral-100 {
+  background-color: #ede8df;
+}
+:root:not(.dark) .border-t {
+  border-color: #ddd5c8;
+}
