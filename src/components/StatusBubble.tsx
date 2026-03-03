@@ -113,8 +113,8 @@ export default function StatusBubble({ emoji, text }: Props) {
             zIndex: 1,
             display: "flex",
             alignItems: "center",
-            gap: 12,
-            padding: "12px 20px",
+            gap: 20,
+            padding: "5px 10px",
           }}
         >
           <span style={{ fontSize: "2rem", lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
@@ -123,7 +123,7 @@ export default function StatusBubble({ emoji, text }: Props) {
       </div>
 
       {/* Thought trail */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 5, paddingLeft: 24, marginTop: 6 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 5, paddingLeft: 24, marginTop: padBottom + 6 }}>
         <div className="trail-dot" style={{ width: 14, height: 14 }} />
         <div className="trail-dot" style={{ width: 10, height: 10 }} />
         <div className="trail-dot" style={{ width: 6, height: 6 }} />
@@ -132,7 +132,7 @@ export default function StatusBubble({ emoji, text }: Props) {
       <style>{`
         .cloud-fill { fill: #e5e5e5; }
         .dark .cloud-fill { fill: #2a2a2a; }
-        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: 380px; }
+        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: 380px; font-weight: 500; }
         .dark .cloud-label { color: #d4d4d4; }
         .trail-dot { border-radius: 50%; background: #e5e5e5; }
         .dark .trail-dot { background: #2a2a2a; }
