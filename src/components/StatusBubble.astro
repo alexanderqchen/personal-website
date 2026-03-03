@@ -1,0 +1,12 @@
+---
+import StatusBubbleReact from "./StatusBubble.tsx";
+
+interface Props {
+  emoji: string;
+  text: string;
+}
+
+const { emoji, text } = Astro.props;
+---
+
+<StatusBubbleReact emoji={emoji} text={text} client:load />

@@ -4,10 +4,10 @@ interface Props {
   description: string;
   status: "Active" | "Shipped" | "Graveyard" | "Paused" | "Left" | "Archived";
   tags?: string[];
-  links?: { label: string; href: string }[];
+  href?: string;
 }
 
-const { name, description, status, tags = [], links = [] } = Astro.props;
+const { name, description, status, tags = [], href } = Astro.props;
 
 const statusColors = {
   Active:
@@ -22,10 +22,18 @@ const statusColors = {
   Archived:
     "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400",
 };
+
+const Tag = href ? "a" : "div";
 ---
 
-<div
-  class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+<Tag
+  href={href}
+  target={href ? "_blank" : undefined}
+  rel={href ? "noopener noreferrer" : undefined}
+  class:list={[
+    "block border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 transition-colors",
+    href && "hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer",
+  ]}
 >
   <div class="flex items-start justify-between gap-3 mb-2">
     <h3 class="font-semibold">{name}</h3>
@@ -38,7 +46,7 @@ const statusColors = {
   </p>
   {
     tags.length > 0 && (
-      <div class="flex flex-wrap gap-1.5 mb-3">
+      <div class="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
           <span class="text-xs px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
             {tag}
@@ -47,20 +55,4 @@ const statusColors = {
       </div>
     )
   }
-  {
-    links.length > 0 && (
-      <div class="flex gap-3">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-accent hover:text-accent-dark transition-colors"
-          >
-            {link.label} &rarr;
-          </a>
-        ))}
-      </div>
-    )
-  }
-</div>
+</Tag>

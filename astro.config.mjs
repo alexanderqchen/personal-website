@@ -8,4 +8,9 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   adapter: vercel(),
   output: "static",
+  vite: {
+    server: {
+      allowedHosts: ["clawdbots-macbook-pro.tail4a6acb.ts.net"],
+    },
+  },
 });

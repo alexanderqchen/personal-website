@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import GitHubActivity from "../components/GitHubCalendar.tsx";
+import StatusBubble from "../components/StatusBubble.astro";
+import status from "../data/status.json";
 
 const posts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
@@ -11,32 +13,16 @@ const posts = (await getCollection("blog"))
 ---
 
 <BaseLayout title="Alexander Chen">
-  <!-- Intro -->
+  <!-- Status + Intro -->
   <section class="mb-16">
-    <h1 class="text-3xl font-bold mb-4 font-serif">Hey, I'm Alexander.</h1>
-    <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
-      27-year-old builder. Ex-cofounder/CTO. Now doing my own thing — making
-      stuff I care about and sharing the process. Inspired by people who build
-      weird, beautiful things on the internet.
-    </p>
-  </section>
-
-  <!-- Now -->
-  <section class="mb-16">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Now
-    </h2>
-    <div
-      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
-    >
-      <p class="text-neutral-700 dark:text-neutral-300">
-        Building <a
-          href="https://github.com/alexanderqchen/orb-ui"
-          class="text-accent hover:text-accent-dark font-medium transition-colors"
-          target="_blank"
-          rel="noopener noreferrer">orb-ui</a
-        > — an open-source React component library for voice AI agents.
-        Designing the interface for how humans talk to machines.
+    <StatusBubble emoji={status.emoji} text={status.text} />
+    <div class="mt-8">
+      <h1 class="text-3xl font-bold mb-4 font-serif">Hey, I'm Alexander.</h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        I build things. Still figuring out what I want that to mean.
+      </p>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mt-3">
+        YC W25 alum — cofounded a startup, learned a lot, moved on. Before that: a year building and shipping things in Taiwan, then startups backed by Sequoia, a16z, Google Ventures — including one IPO. Amazon. UCLA CS.
       </p>
     </div>
   </section>
@@ -51,18 +37,13 @@ const posts = (await getCollection("blog"))
         name="orb-ui"
         description="Open-source React component library for voice AI agents."
         status="Active"
-        links={[
-          { label: "GitHub", href: "https://github.com/alexanderqchen/orb-ui" },
-          { label: "npm", href: "https://www.npmjs.com/package/orb-ui" },
-        ]}
+        href="https://github.com/alexanderqchen/orb-ui"
       />
       <ProjectCard
         name="TypeChinese"
         description="Typing practice for Chinese learners. Still getting 500 users a month."
         status="Active"
-        links={[
-          { label: "Live", href: "https://typechinese.io" },
-        ]}
+        href="https://typechinese.io"
       />
     </div>
     <a
