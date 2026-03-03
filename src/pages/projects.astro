@@ -9,27 +9,6 @@ import ProjectCard from "../components/ProjectCard.astro";
     Things I've built and am building.
   </p>
 
-  <!-- Currently focused on -->
-  <section class="mb-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Currently focused on
-    </h2>
-    <div class="grid gap-4">
-      <ProjectCard
-        name="orb-ui"
-        description="Open-source React component library for voice AI agents."
-        status="WIP"
-        href="https://github.com/alexanderqchen/orb-ui"
-      />
-      <ProjectCard
-        name="TypeChinese"
-        description="Typing practice for Chinese learners. Still getting 500 users a month."
-        status="Live"
-        href="https://typechinese.io"
-      />
-    </div>
-  </section>
-
   <!-- WIP -->
   <section class="mb-12">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
@@ -41,6 +20,7 @@ import ProjectCard from "../components/ProjectCard.astro";
         description="Open-source React component library for voice AI agents."
         status="WIP"
         href="https://github.com/alexanderqchen/orb-ui"
+        focused
       />
     </div>
   </section>
@@ -56,6 +36,7 @@ import ProjectCard from "../components/ProjectCard.astro";
         description="Typing practice for Chinese learners. Still getting 500 users a month."
         status="Live"
         href="https://typechinese.io"
+        focused
       />
       <ProjectCard
         name="Keyboard Layout Tester"
@@ -67,7 +48,7 @@ import ProjectCard from "../components/ProjectCard.astro";
         name="Google Flights Currency"
         description="See Google Flights prices in your local currency."
         status="Live"
-        href="https://github.com/alexanderqchen/google-flights-currency"
+        href="https://chromewebstore.google.com/detail/google-flights-currency-s/nameliafoadmpledepdbcgnogcnfiemo?hl=en"
       />
     </div>
   </section>

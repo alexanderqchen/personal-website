@@ -5,9 +5,10 @@ interface Props {
   status: "WIP" | "Live" | "Dead";
   tags?: string[];
   href?: string;
+  focused?: boolean;
 }
 
-const { name, description, status, tags = [], href } = Astro.props;
+const { name, description, status, tags = [], href, focused = false } = Astro.props;
 
 const statusColors = {
   WIP: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
@@ -29,9 +30,16 @@ const Tag = href ? "a" : "div";
 >
   <div class="flex items-start justify-between gap-3 mb-2">
     <h3 class="font-semibold">{name}</h3>
-    <span class:list={["text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
-      {status}
-    </span>
+    <div class="flex items-center gap-1.5">
+      {focused && (
+        <span class="text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
+          ★ focused
+        </span>
+      )}
+      <span class:list={["text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap", statusColors[status]]}>
+        {status}
+      </span>
+    </div>
   </div>
   <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
     {description}
