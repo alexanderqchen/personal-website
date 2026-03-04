@@ -139,7 +139,7 @@ export default function StatusBubble({ emoji, text }: Props) {
       </div>
 
       <style>{`
-        .cloud-fill { fill: #e5e5e5; }
+        .cloud-fill { fill: #eaeaea; }
         .dark .cloud-fill { fill: #2a2a2a; }
         .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: min(380px, calc(100vw - 100px)); font-weight: 700; }
         .dark .cloud-label { color: #d4d4d4; }
