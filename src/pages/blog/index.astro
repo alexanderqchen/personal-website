@@ -20,7 +20,7 @@ const posts = (await getCollection("blog"))
         <BlogPostCard
           id={post.id}
           title={post.data.title}
-          description={post.data.description}
+          body={post.body}
           date={post.data.date}
         />
       ))

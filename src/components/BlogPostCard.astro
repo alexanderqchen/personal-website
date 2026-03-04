@@ -2,11 +2,25 @@
 interface Props {
   id: string;
   title: string;
-  description: string;
+  body: string;
   date: Date;
 }
 
-const { id, title, description, date } = Astro.props;
+const { id, title, body, date } = Astro.props;
+
+function excerpt(raw: string, max = 160): string {
+  const text = raw
+    .replace(/#{1,6}\s+/g, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/\n+/g, " ")
+    .trim();
+  return text.length > max ? text.slice(0, max).trimEnd() + "…" : text;
+}
+
+const description = excerpt(body);
 
 const formatted = date.toLocaleDateString("en-US", {
   timeZone: "UTC",

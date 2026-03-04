@@ -7,8 +7,11 @@ interface Props {
   text: string;
 }
 
-function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number): string {
-  const radii = [45, 65, 35, 58, 48, 70, 33, 55, 42, 68, 36, 52, 50, 67, 32, 48, 44, 63, 38, 56, 46, 69, 34, 50, 47, 64, 36, 54, 49, 66, 32, 52, 43, 62, 37, 58];
+function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number, mobile = false): string {
+  const scale = mobile ? 0.6 : 1.0;
+  const baseRadii = [45, 65, 35, 58, 48, 70, 33, 55, 42, 68, 36, 52, 50, 67, 32, 48, 44, 63, 38, 56, 46, 69, 34, 50, 47, 64, 36, 54, 49, 66, 32, 52, 43, 62, 37, 58];
+  const radii = baseRadii.map(r => Math.round(r * scale));
+  const sideR = Math.round(36 * scale);
   const cr = 25; // corner arc radius
 
   const totalW = w + padX * 2;
@@ -25,7 +28,8 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
     const step = len / n;
     let d = "";
     for (let i = 0; i < n; i++) {
-      const r = sideR ?? radii[(ri + i) % radii.length];
+      const rRaw = sideR ?? radii[(ri + i) % radii.length];
+      const r = Math.max(rRaw, step / 2 + 1); // r must be >= chord/2 for valid arc
       const ex = startX + dx * step * (i + 1);
       const ey = startY + dy * step * (i + 1);
       d += `A ${r},${r} 0 0,1 ${ex.toFixed(2)},${ey.toFixed(2)} `;
@@ -46,7 +50,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 ${totalW},${cr} `;
 
   // Right edge: 1 bump spanning the full side
-  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, 36);
+  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, sideR);
   ri += 1;
 
   // Bottom-right corner arc
@@ -61,7 +65,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 0,${totalH - cr} `;
 
   // Left edge: 1 bump spanning the full side
-  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, 36);
+  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, sideR);
 
   // Top-left corner arc (back to start)
   d += `A ${cr},${cr} 0 0,1 ${cr},0 `;
@@ -73,6 +77,7 @@ export default function StatusBubble({ emoji, text }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 320, h: 64 });
   const [initialized, setInitialized] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -84,13 +89,16 @@ export default function StatusBubble({ emoji, text }: Props) {
     obs.observe(el);
     setSize({ w: el.offsetWidth, h: el.offsetHeight });
     setInitialized(true);
-    return () => obs.disconnect();
+
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => { obs.disconnect(); window.removeEventListener("resize", checkMobile); };
   }, []);
 
-  const maxR = 70;
-  const padX = 38;
-  const padTop = 40;
-  const padBottom = 30;
+  const padX = isMobile ? 18 : 38;
+  const padTop = isMobile ? 28 : 40;
+  const padBottom = isMobile ? 20 : 30;
   const svgW = size.w + padX * 2;
   const svgH = size.h + padTop + padBottom;
 
@@ -105,7 +113,7 @@ export default function StatusBubble({ emoji, text }: Props) {
           aria-hidden="true"
         >
           <path
-            d={cloudPath(size.w, size.h, padX, padTop, padBottom)}
+            d={cloudPath(size.w, size.h, padX, padTop, padBottom, isMobile)}
             className="cloud-fill"
           />
         </svg>
@@ -125,20 +133,12 @@ export default function StatusBubble({ emoji, text }: Props) {
         </div>
       </div>
 
-      {/* Thought trail — angled down-left */}
-      <div style={{ position: "relative", height: 40, marginTop: padBottom + 6 }}>
-        <div className="trail-dot" style={{ width: 14, height: 14, position: "absolute", left: 24, top: 0 }} />
-        <div className="trail-dot" style={{ width: 10, height: 10, position: "absolute", left: 14, top: 14 }} />
-        <div className="trail-dot" style={{ width: 6,  height: 6,  position: "absolute", left: 6,  top: 26 }} />
-      </div>
-
       <style>{`
         .cloud-fill { fill: #e5e5e5; }
         .dark .cloud-fill { fill: #2a2a2a; }
-        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: 380px; font-weight: 700; }
+        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: min(380px, calc(100vw - 100px)); font-weight: 700; }
         .dark .cloud-label { color: #d4d4d4; }
-        .trail-dot { border-radius: 50%; background: #e5e5e5; }
-        .dark .trail-dot { background: #2a2a2a; }
+
       `}</style>
     </div>
   );
