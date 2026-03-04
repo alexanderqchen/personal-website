@@ -7,33 +7,43 @@ interface Props {
   text: string;
 }
 
+// Compute arc radius for a desired sagitta (protrusion depth) and chord length
+function sagittaToR(sagitta: number, chord: number): number {
+  return (sagitta * sagitta + (chord / 2) * (chord / 2)) / (2 * sagitta);
+}
+
 function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number, mobile = false): string {
-  const scale = mobile ? 0.6 : 1.0;
-  const baseRadii = [45, 65, 35, 58, 48, 70, 33, 55, 42, 68, 36, 52, 50, 67, 32, 48, 44, 63, 38, 56, 46, 69, 34, 50, 47, 64, 36, 54, 49, 66, 32, 52, 43, 62, 37, 58];
-  const radii = baseRadii.map(r => Math.round(r * scale));
-  const sideR = Math.round(36 * scale);
   const cr = 25; // corner arc radius
+
+  // Target sagitta range — bumps always protrude this much, regardless of cloud width
+  const sagittaMin = mobile ? 7 : 8;
+  const sagittaMax = mobile ? 13 : 16;
+  const sagittaSide = mobile ? 9 : 12; // side bumps
 
   const totalW = w + padX * 2;
   const totalH = h + padTop + padBottom;
 
-  // Edge lengths (between corner arcs)
   const topLen = totalW - cr * 2;
   const rightLen = totalH - cr * 2;
   const bottomLen = topLen;
   const leftLen = rightLen;
 
-  function edgeBumps(len: number, startX: number, startY: number, dx: number, dy: number, ri: number, forcedN?: number, sideR?: number): string {
+  // Deterministic variation based on position index
+  function varyingSagitta(i: number, ri: number): number {
+    const t = ((i * 7 + ri * 3) % 10) / 10;
+    return sagittaMin + t * (sagittaMax - sagittaMin);
+  }
+
+  function edgeBumps(len: number, startX: number, startY: number, dx: number, dy: number, ri: number, forcedN?: number, isSide = false): string {
     const n = forcedN ?? Math.max(3, Math.floor(len / 55));
     const step = len / n;
     let d = "";
     for (let i = 0; i < n; i++) {
-      const rRaw = sideR ?? radii[(ri + i) % radii.length];
-      // r must be >= chord/2; if not, use a large r for a flat gentle arc instead of a semicircle
-      const r = rRaw < step / 2 + 1 ? step * 2 : rRaw;
+      const sagitta = isSide ? sagittaSide : varyingSagitta(i, ri);
+      const r = sagittaToR(sagitta, step);
       const ex = startX + dx * step * (i + 1);
       const ey = startY + dy * step * (i + 1);
-      d += `A ${r},${r} 0 0,1 ${ex.toFixed(2)},${ey.toFixed(2)} `;
+      d += `A ${r.toFixed(1)},${r.toFixed(1)} 0 0,1 ${ex.toFixed(2)},${ey.toFixed(2)} `;
     }
     return d;
   }
@@ -42,31 +52,25 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   let d = `M ${cr},0 `;
 
   // Top edge: left to right
-  let ri = 0;
-  const topN = Math.max(3, Math.floor(topLen / 55));
-  d += edgeBumps(topLen, cr, 0, 1, 0, ri);
-  ri += topN;
+  d += edgeBumps(topLen, cr, 0, 1, 0, 0);
 
   // Top-right corner arc
   d += `A ${cr},${cr} 0 0,1 ${totalW},${cr} `;
 
-  // Right edge: 1 bump spanning the full side
-  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, sideR);
-  ri += 1;
+  // Right edge: 1 bump
+  d += edgeBumps(rightLen, totalW, cr, 0, 1, 10, 1, true);
 
   // Bottom-right corner arc
   d += `A ${cr},${cr} 0 0,1 ${totalW - cr},${totalH} `;
 
-  // Bottom edge: right to left (reverse)
-  const bottomN = Math.max(3, Math.floor(bottomLen / 55));
-  d += edgeBumps(bottomLen, totalW - cr, totalH, -1, 0, ri % radii.length);
-  ri += bottomN;
+  // Bottom edge: right to left
+  d += edgeBumps(bottomLen, totalW - cr, totalH, -1, 0, 5);
 
   // Bottom-left corner arc
   d += `A ${cr},${cr} 0 0,1 0,${totalH - cr} `;
 
-  // Left edge: 1 bump spanning the full side
-  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, sideR);
+  // Left edge: 1 bump
+  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 20, 1, true);
 
   // Top-left corner arc (back to start)
   d += `A ${cr},${cr} 0 0,1 ${cr},0 `;
