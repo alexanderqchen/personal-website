@@ -9,68 +9,44 @@ import ProjectCard from "../components/ProjectCard.astro";
     Things I've built and am building.
   </p>
 
-  <!-- WIP -->
-  <section class="mb-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      WIP
-    </h2>
-    <div class="grid gap-4">
-      <ProjectCard
-        name="orb-ui"
-        description="Open-source React component library for voice AI agents."
-        status="WIP"
-        href="https://github.com/alexanderqchen/orb-ui"
-        focused
-      />
-    </div>
-  </section>
-
-  <!-- Live -->
-  <section class="mb-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Live
-    </h2>
-    <div class="grid gap-4">
-      <ProjectCard
-        name="TypeChinese"
-        description="Typing practice for Chinese learners. Still getting 500 users a month."
-        status="Live"
-        href="https://typechinese.io"
-        focused
-      />
-      <ProjectCard
-        name="Keyboard Layout Tester"
-        description="Test and compare keyboard layouts side by side."
-        status="Live"
-        href="https://keyboard.experimental.software"
-      />
-      <ProjectCard
-        name="Google Flights Currency"
-        description="See Google Flights prices in your local currency."
-        status="Live"
-        href="https://chromewebstore.google.com/detail/google-flights-currency-s/nameliafoadmpledepdbcgnogcnfiemo?hl=en"
-      />
-    </div>
-  </section>
-
-  <!-- Dead -->
-  <section class="mb-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      Dead 🪦
-    </h2>
-    <div class="grid gap-4">
-      <ProjectCard
-        name="1000 Pound Club"
-        description="Become a member of the 1000 pound club."
-        status="Dead"
-        href="https://1000pound.com"
-      />
-      <ProjectCard
-        name="flux.rip"
-        description="A social media site where the UX is so weird it becomes unusable. Built in college."
-        status="Dead"
-        href="https://github.com/UCLA-Creative-Labs/flux"
-      />
-    </div>
-  </section>
+  <div class="grid gap-4">
+    <ProjectCard
+      name="orb-ui"
+      description="Open-source React component library for voice AI agents."
+      status="WIP"
+      href="https://github.com/alexanderqchen/orb-ui"
+      focused
+    />
+    <ProjectCard
+      name="TypeChinese"
+      description="Typing practice for Chinese learners. Still getting 500 users a month."
+      status="Live"
+      href="https://typechinese.io"
+      focused
+    />
+    <ProjectCard
+      name="Keyboard Layout Tester"
+      description="Test and compare keyboard layouts side by side."
+      status="Live"
+      href="https://keyboard.experimental.software"
+    />
+    <ProjectCard
+      name="Google Flights Currency"
+      description="See Google Flights prices in your local currency."
+      status="Live"
+      href="https://chromewebstore.google.com/detail/google-flights-currency-s/nameliafoadmpledepdbcgnogcnfiemo?hl=en"
+    />
+    <ProjectCard
+      name="1000 Pound Club"
+      description="Become a member of the 1000 pound club."
+      status="Dead"
+      href="https://1000pound.com"
+    />
+    <ProjectCard
+      name="flux.rip"
+      description="A social media site where the UX is so weird it becomes unusable. Built in college."
+      status="Dead"
+      href="https://github.com/UCLA-Creative-Labs/flux"
+    />
+  </div>
 </BaseLayout>

@@ -4,7 +4,7 @@ import type { Activity } from "react-activity-calendar";
 
 const lightTheme = {
   light: [
-    "#ddd5c8", // empty — warm tan matching page border color
+    "#ece8e2", // empty — light warm tan
     "#c6e48b",
     "#7bc96f",
     "#239a3b",

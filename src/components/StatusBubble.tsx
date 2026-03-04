@@ -9,7 +9,7 @@ interface Props {
 
 function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom: number): string {
   const radii = [45, 65, 35, 58, 48, 70, 33, 55, 42, 68, 36, 52, 50, 67, 32, 48, 44, 63, 38, 56, 46, 69, 34, 50, 47, 64, 36, 54, 49, 66, 32, 52, 43, 62, 37, 58];
-  const cr = 30; // corner arc radius
+  const cr = 25; // corner arc radius
 
   const totalW = w + padX * 2;
   const totalH = h + padTop + padBottom;
@@ -46,7 +46,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 ${totalW},${cr} `;
 
   // Right edge: 1 bump spanning the full side
-  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, 45);
+  d += edgeBumps(rightLen, totalW, cr, 0, 1, 0, 1, 36);
   ri += 1;
 
   // Bottom-right corner arc
@@ -61,7 +61,7 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
   d += `A ${cr},${cr} 0 0,1 0,${totalH - cr} `;
 
   // Left edge: 1 bump spanning the full side
-  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, 45);
+  d += edgeBumps(leftLen, 0, totalH - cr, 0, -1, 0, 1, 36);
 
   // Top-left corner arc (back to start)
   d += `A ${cr},${cr} 0 0,1 ${cr},0 `;
@@ -116,11 +116,11 @@ export default function StatusBubble({ emoji, text }: Props) {
             zIndex: 1,
             display: "flex",
             alignItems: "center",
-            gap: 20,
-            padding: "5px 10px",
+            gap: 10,
+            padding: "0px",
           }}
         >
-          <span style={{ fontSize: "2rem", lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
+          <span style={{ fontSize: "1.25rem", lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
           <span className="cloud-label">{text}</span>
         </div>
       </div>
