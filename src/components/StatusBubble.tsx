@@ -135,7 +135,7 @@ export default function StatusBubble({ emoji, text }: Props) {
       <style>{`
         .cloud-fill { fill: #e5e5e5; }
         .dark .cloud-fill { fill: #2a2a2a; }
-        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: 380px; font-weight: 500; }
+        .cloud-label { font-size: 0.875rem; line-height: 1.4; color: #404040; max-width: 380px; font-weight: 700; }
         .dark .cloud-label { color: #d4d4d4; }
         .trail-dot { border-radius: 50%; background: #e5e5e5; }
         .dark .trail-dot { background: #2a2a2a; }

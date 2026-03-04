@@ -57,19 +57,6 @@ const posts = (await getCollection("blog"))
     </a>
   </section>
 
-  <!-- GitHub Activity -->
-  <section class="mb-16">
-    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
-      GitHub
-    </h2>
-    <div
-      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
-    >
-      <GitHubActivity client:load />
-    </div>
-  </section>
-
-  <!-- Revenue -->
   <!-- Recent Writing -->
   <section class="mb-16">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
@@ -93,5 +80,17 @@ const posts = (await getCollection("blog"))
     >
       All posts &rarr;
     </a>
+  </section>
+
+  <!-- GitHub Activity -->
+  <section class="mb-16">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">
+      GitHub
+    </h2>
+    <div
+      class="border border-neutral-200 dark:border-neutral-800 rounded-xl p-5"
+    >
+      <GitHubActivity client:load />
+    </div>
   </section>
 </BaseLayout>
