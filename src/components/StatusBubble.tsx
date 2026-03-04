@@ -29,7 +29,8 @@ function cloudPath(w: number, h: number, padX: number, padTop: number, padBottom
     let d = "";
     for (let i = 0; i < n; i++) {
       const rRaw = sideR ?? radii[(ri + i) % radii.length];
-      const r = Math.max(rRaw, step / 2 + 1); // r must be >= chord/2 for valid arc
+      // r must be >= chord/2; if not, use a large r for a flat gentle arc instead of a semicircle
+      const r = rRaw < step / 2 + 1 ? step * 2 : rRaw;
       const ex = startX + dx * step * (i + 1);
       const ey = startY + dy * step * (i + 1);
       d += `A ${r},${r} 0 0,1 ${ex.toFixed(2)},${ey.toFixed(2)} `;
