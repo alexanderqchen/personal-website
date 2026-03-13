@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import projects from "../data/projects.json";
 import GitHubActivity from "../components/GitHubCalendar.tsx";
 import StatusBubble from "../components/StatusBubble.astro";
 import BlogPostCard from "../components/BlogPostCard.astro";
@@ -54,18 +55,14 @@ const posts = (await getCollection("blog"))
       Currently focused on
     </h2>
     <div class="grid gap-4 sm:grid-cols-2">
-      <ProjectCard
-        name="orb-ui"
-        description="Open-source React component library for voice AI agents."
-        status="WIP"
-        href="https://github.com/alexanderqchen/orb-ui"
-      />
-      <ProjectCard
-        name="TypeChinese"
-        description="Typing practice for Chinese learners. Still getting 500 users a month."
-        status="Live"
-        href="https://typechinese.io"
-      />
+      {projects.filter(p => p.focused).map(p => (
+        <ProjectCard
+          name={p.name}
+          description={p.description}
+          status={p.status}
+          href={p.href}
+        />
+      ))}
     </div>
     <a
       href="/projects"
