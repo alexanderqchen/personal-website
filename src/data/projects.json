@@ -7,8 +7,8 @@
     "focused": true
   },
   {
-    "name": "TypeChinese",
-    "description": "Typing practice for Chinese learners. Still getting 500 users a month.",
+    "name": "TypeChinese - 中文打字",
+    "description": "Chinese typing test and practice for learners building speed with characters, pinyin, and vocabulary.",
     "status": "Live",
     "href": "https://typechinese.io",
     "focused": true
