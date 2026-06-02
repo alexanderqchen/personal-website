@@ -14,6 +14,13 @@
     "focused": true
   },
   {
+    "name": "badminton.fyi",
+    "description": "Searchable badminton racket database with specs, prices, and popularity signals.",
+    "status": "Live",
+    "href": "https://badminton.fyi",
+    "focused": true
+  },
+  {
     "name": "Keyboard Layout Tester",
     "description": "Test and compare keyboard layouts side by side.",
     "status": "Live",
