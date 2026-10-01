@@ -1,5 +1,12 @@
 [
   {
+    "name": "RxRecall",
+    "description": "An iPhone app for learning the Top 200 drugs through Lock Screen and Home Screen widgets. Built for pharmacy students.",
+    "status": "Live",
+    "href": "https://rx-recall.com",
+    "focused": true
+  },
+  {
     "name": "orb-ui",
     "description": "Open-source React component library for voice AI agents.",
     "status": "Live",
